@@ -10,13 +10,17 @@ class User < ApplicationRecord
   validates :email, :username, uniqueness: true
   validates :email, :email => true
   validates :username, format: { with: /[a-z0-9_]{4,40}/ }
+  validates :username, confirmation: { case_sensitive: false }
 
   attr_accessor :password
 
   validates_presence_of :password, on: :create
   validates_confirmation_of :password
 
+  before_validation :normalaize_username
+
   before_save :encrypt_password
+  before_save :normalaize_username
 
   def encrypt_password
     if password.present?
@@ -67,5 +71,9 @@ class User < ApplicationRecord
 
     # Иначе, возвращаем nil
     nil
+  end
+
+  def normalaize_username
+    username.downcase!
   end
 end
