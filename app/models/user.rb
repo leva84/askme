@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
+  validates :email, :email => true
+  validates :username, format: { with: /[a-z0-9_]{4,40}/ }
 
   attr_accessor :password
 

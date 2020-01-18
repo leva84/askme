@@ -6,6 +6,7 @@ ruby '2.6.3'
 gem 'rails', '~> 5.2.0'
 gem 'sqlite3'
 gem 'jquery-rails'
+gem "rails_email_validator"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
