@@ -71,6 +71,6 @@ class User < ApplicationRecord
   end
 
   def normalaize_username
-    username.downcase!
+    username == nil ? username : username.downcase!
   end
 end
