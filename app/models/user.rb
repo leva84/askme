@@ -12,7 +12,8 @@ class User < ApplicationRecord
   validates :email, format: { with: REGEXP_EMAIL }
   validates :username, format: { with: REGEXP_USERNAME }
   validates :username, confirmation: { case_sensitive: false }
-  validates :password, presence: { on: :create , confirmation: true }
+  validates :password, presence: { on: :create }
+  validates :password, confirmation: true
 
   attr_accessor :password
 
