@@ -5,7 +5,7 @@
   </h1>
 
   <div class="user-image-div">
-    <%# Рисуем аватарку пользователя
+    <%# Рисуем аватарку пользователя%>
     <%= image_tag user_avatar(@user), class: 'user-image', alt: '[Фото]' %>
   </div>
 
@@ -16,6 +16,10 @@
 
   <div class="user-ask-button container text-center">
     <%= link_to "Спроси меня", '', class: 'button button-light', id: 'ask-button' %>
+  </div>
+
+  <div class="title-small buffer-both">
+    <%= "#{@questions_count} #{@declension}" %>
   </div>
 </div>
 
