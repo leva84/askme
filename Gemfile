@@ -5,14 +5,10 @@ ruby '2.6.3'
 
 gem 'rails', '~> 5.2.0'
 gem 'jquery-rails'
-
-group :production do
-  gem 'pg'
-end
+gem 'sqlite3'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'sqlite3'
 end
 
 group :development do
