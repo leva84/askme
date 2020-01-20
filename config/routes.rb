@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   resources :questions
 
   get 'show' => 'users#show'
+  get 'sign_up' => 'users#new'
+  get 'log_out' => 'sessions#destroy'
+  get 'log_in' => 'sessions#new'
 end
