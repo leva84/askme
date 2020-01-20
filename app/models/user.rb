@@ -8,11 +8,11 @@ class User < ApplicationRecord
 
   has_many :questions
 
-  validates :email, :username, { presence: true, uniqueness: true }
-  validates :email, format: { with: REGEXP_EMAIL }
-  validates :username, format: { with: REGEXP_USERNAME }
-  validates :username, confirmation: { case_sensitive: false }
-  validates :password, presence: { on: :create }
+  validates :email, :username, {presence: true, uniqueness: true}
+  validates :email, format: {with: REGEXP_EMAIL}
+  validates :username, format: {with: REGEXP_USERNAME}
+  validates :username, confirmation: {case_sensitive: false}
+  validates :password, presence: {on: :create}
   validates :password, confirmation: true
 
   attr_accessor :password

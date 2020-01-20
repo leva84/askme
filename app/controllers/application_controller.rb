@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :reject_user, :declension
 
   private
+
   def declension(number, enot, enota, enotov)
     indicator1 = number % 10
     indicator2 = number % 100
