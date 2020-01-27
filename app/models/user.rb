@@ -3,7 +3,7 @@ require 'openssl'
 class User < ApplicationRecord
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest::SHA256.new
-  REGEXP_USERNAME = /[a-z0-9_]{4,40}/
+  REGEXP_USERNAME = /[A-Za-z0-9._%+-]{4,40}/
   REGEXP_EMAIL = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
 
   has_many :questions
@@ -72,6 +72,6 @@ class User < ApplicationRecord
   end
 
   def normalaize_username
-    username == nil ? username : username.downcase!
+    username.downcase! if username.present?
   end
 end
