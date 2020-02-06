@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 
   before_action :load_user, except: [:index, :create, :new]
   # Порядок before_action очень важен! Они выполняются сверху вниз
-  before_action :load_user, except: [:index, :create, :new]
   # Проверяем, имеет ли юзер доступ к экшену, делаем это для всех действий, кроме
   # :index, :new, :create, :show — к ним есть доступ у всех, даже у анонимных юзеров.
   before_action :authorize_user, except: [:index, :new, :create, :show]
@@ -25,7 +24,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to root_url, notice: 'Пользователь успешно зарегистрирован!'
+      session[:user_id] = @user.id
+      redirect_to user_path(@user), notice: 'Пользователь успешно зарегистрирован!'
     else
       render 'new'
     end
