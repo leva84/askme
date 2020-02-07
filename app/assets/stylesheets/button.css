@@ -29,3 +29,8 @@
   line-height: 15px;
   padding: 7px 15px;
 }
+
+.button-danger {
+  background: #B00100;
+  color: white;
+}

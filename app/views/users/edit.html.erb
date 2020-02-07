@@ -45,13 +45,19 @@
 
       <div>
         <%= f.label 'Выбрать цвет фона', class: 'form-label' %>
-        <%= color_field(:user, :favorite_color.to_s, class: 'form-text-field') %>
+        <%= color_field(:user, :favorite_color.to_s) %>
       </div>
 
       <div class="form-action buffer-top">
         <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
       </div>
 
-    <% end %>
+      <br>
+      <hr>
+      <br>
+      <%= link_to "Удалить профиль", user_path(@user), method: :delete, data: {confirm: "Хотите удалить профиль?"},
+                :class => 'button button-danger button-small' %>
+      <br>
+  <% end %>
   </div>
 </div>
