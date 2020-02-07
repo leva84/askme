@@ -43,9 +43,15 @@
         <%= f.password_field :password_confirmation, class: 'form-text-field' %>
       </div>
 
+      <div>
+        <%= f.label 'Выбрать цвет фона', class: 'form-label' %>
+        <%= color_field(@user, :favorite_color, class: 'form-text-field') %>
+      </div>
+
       <div class="form-action buffer-top">
         <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
       </div>
+
     <% end %>
   </div>
 </div>
