@@ -50,6 +50,7 @@
         <div class="form-field">
           <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
           <%= f.text_area :text, class: 'form-textarea' %>
+          <%= f.hidden_field(:autor) %>
         </div>
 
         <div class="form-action">
@@ -65,6 +66,8 @@
     <div class="questions-list">
       <% @questions.each do |question| %>
         <%= render partial: 'questions/question', object: question %>
+        <%= (question.autor).inspect %>
+
       <% end %>
     </div>
   </div>
