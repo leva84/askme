@@ -5,6 +5,7 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest::SHA256.new
   REGEXP_USERNAME = /\A[\w]{4,40}\z/
   REGEXP_EMAIL = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
+  REGEXP_COLOR = /\A^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/
 
   attr_accessor :password
 
@@ -15,6 +16,8 @@ class User < ApplicationRecord
   validates :username, format: {with: REGEXP_USERNAME}
   validates :password, presence: {on: :create}
   validates :password, confirmation: true
+  validates :favorite_color, format: {with: REGEXP_COLOR}
+  validates :favorite_color, length: { is: 7 }
 
   before_validation :normalaize_username
   before_save :encrypt_password
