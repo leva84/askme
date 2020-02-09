@@ -48,9 +48,14 @@
         <%= f.hidden_field :user_id %>
 
         <div class="form-field">
-          <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
-          <%= f.text_area :text, class: 'form-textarea' %>
-          <%= f.hidden_field(:autor) %>
+          <% if @autor == nil %>
+            <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
+            <%= f.text_area :text, class: 'form-textarea' %>
+          <% else %>
+            <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
+            <%= f.text_area :text, class: 'form-textarea' %>
+            <%= f.hidden_field(:autor, :value => %[#{@autor.username} #{@autor.id}] ) %>
+          <% end %>
         </div>
 
         <div class="form-action">
@@ -66,8 +71,13 @@
     <div class="questions-list">
       <% @questions.each do |question| %>
         <%= render partial: 'questions/question', object: question %>
-        <%= (question.autor).inspect %>
-
+        <% if question.autor == nil %>
+          <%= "Гость" %>
+        <% else %>
+          <% @autor_data = question.autor.split %>
+          <% @autor_data_pop = @autor_data.take (@autor_data.size - 1) %>
+          <%= link_to "#{@autor_data_pop.join}", user_url(@autor_data.last) %>
+        <% end %>
       <% end %>
     </div>
   </div>

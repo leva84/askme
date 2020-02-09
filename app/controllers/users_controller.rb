@@ -52,10 +52,10 @@ class UsersController < ApplicationController
     @questions_count = @questions.count
     @answers_count = @questions.where.not(answer: nil).count
     @unanswered_count = @questions_count - @answers_count
+    @autor = current_user
   end
 
   def destroy
-    session[:user_id] = @user.id
     @user.destroy
 
     redirect_to root_path , notice: 'Пользователь удален!'
