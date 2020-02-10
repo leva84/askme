@@ -1,4 +1,5 @@
-<div  class="user-header text-center" style="background: <%= @user.favorite_color %> ">
+<% @user.favorite_color.match(@regexp_color) ? color = @user.favorite_color : color = "#005a55" %>
+<div  class="user-header text-center" style="background: <%= color %> ">
   <h1 class="title-medium">
     <%# Выводим имя пользователя %>
     <%= @user.name %>

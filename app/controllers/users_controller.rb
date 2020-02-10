@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  REGEXP_COLOR = /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/
 
   before_action :load_user, except: [:index, :create, :new]
   # Порядок before_action очень важен! Они выполняются сверху вниз
@@ -47,6 +48,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @regexp_color = REGEXP_COLOR
     @questions = @user.questions.order(created_at: :desc)
     @new_question = @user.questions.build
     @questions_count = @questions.count
