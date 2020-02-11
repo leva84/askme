@@ -58,8 +58,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.questions.destroy
-    @user.destroy
+    @user = current_user
+    @user.questions.delete if @user.delete
 
     redirect_to root_path, notice: 'Пользователь удален!'
   end
@@ -90,9 +90,5 @@ class UsersController < ApplicationController
     else
       @user.favorite_color
     end
-  end
-
-  def user_question_delete
-    @user.questions.all.destroy if User.exists?(@user.id) == false
   end
 end
