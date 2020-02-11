@@ -16,8 +16,6 @@ class User < ApplicationRecord
   validates :username, format: {with: REGEXP_USERNAME}
   validates :password, presence: {on: :create}
   validates :password, confirmation: true
-  validates :favorite_color, format: {with: REGEXP_COLOR}
-  validates :favorite_color, length: { is: 7 }
 
   before_validation :normalaize_username
   before_save :encrypt_password

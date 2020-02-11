@@ -1,5 +1,4 @@
-<% @user.favorite_color.match(@regexp_color) ? color = @user.favorite_color : color = "#005a55" %>
-<div  class="user-header text-center" style="background: <%= color %> ">
+<div  class="user-header text-center" style="background: <%= @user_color %> ">
   <h1 class="title-medium">
     <%# Выводим имя пользователя %>
     <%= @user.name %>
@@ -73,7 +72,7 @@
       <% @questions.each do |question| %>
         <%= render partial: 'questions/question', object: question %>
         <% if question.autor == nil %>
-          <%= "Гость" %>
+          <%= 'Гость' %>
         <% else %>
           <% @autor_data = question.autor.split %>
           <% @autor_data_pop = @autor_data.take (@autor_data.size - 1) %>
