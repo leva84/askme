@@ -74,9 +74,9 @@
         <% if question.autor == nil %>
           <%= 'Гость' %>
         <% else %>
-          <% @autor_data = question.autor.split %>
-          <% @autor_data_pop = @autor_data.take (@autor_data.size - 1) %>
-          <%= link_to "#{@autor_data_pop.join}", user_url(@autor_data.last) %>
+          <% autor_data = question.autor.split %>
+          <% autor_data_pop = autor_data.take (autor_data.size - 1) %>
+          <%= link_to "#{autor_data_pop.join}", user_url(autor_data.last) %>
         <% end %>
       <% end %>
     </div>
