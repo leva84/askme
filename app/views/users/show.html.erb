@@ -76,7 +76,11 @@
         <% else %>
           <% autor_data = question.autor.split %>
           <% autor_data_pop = autor_data.take (autor_data.size - 1) %>
-          <%= link_to "#{autor_data_pop.join}", user_url(autor_data.last) %>
+          <% if User.exists?(autor_data.last) == false %>
+            <%= 'Гость' %>
+          <% else %>
+            <%= link_to "#{autor_data_pop.join}", user_url(autor_data.last) %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
