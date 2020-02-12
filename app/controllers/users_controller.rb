@@ -59,7 +59,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = current_user
-    @user.questions.delete if @user.delete
+    @user.questions.destroy_all if @user.delete
 
     redirect_to root_path, notice: 'Пользователь удален!'
   end
@@ -71,7 +71,8 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :name, :username, :avatar_url, :favorite_color)
+    params.require(:user).permit(:email, :password, :password_confirmation,
+                                 :name, :username, :avatar_url, :favorite_color)
   end
 
   def current_user
