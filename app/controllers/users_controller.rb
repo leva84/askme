@@ -59,7 +59,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = current_user
-    @user.questions.destroy_all if @user.delete
+    @user.destroy
 
     redirect_to root_path, notice: 'Пользователь удален!'
   end

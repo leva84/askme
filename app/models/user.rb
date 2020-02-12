@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   before_validation :normalaize_username
   before_save :encrypt_password
+  before_destroy destroy: :questions
 
   # Служебный метод, преобразующий бинарную строку в шестнадцатиричный формат,
   # для удобства хранения.
