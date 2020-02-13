@@ -5,6 +5,7 @@ ruby '2.6.3'
 
 gem 'rails', '~> 5.2.0'
 gem 'jquery-rails'
+gem 'uglifier'
 
 group :production do
   gem 'pg'
