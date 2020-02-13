@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   def create
-    @autor = log_in_path(@user)
+    @author = current_user
     @question = Question.new(question_params)
 
     if @question.save
@@ -50,9 +50,9 @@ class QuestionsController < ApplicationController
     # Защита от уязвимости: если текущий пользователь — адресат вопроса,
     # он может менять ответы на вопрос, ему доступно и поле :answer.
     if current_user.present? && params[:question][:user_id].to_i == current_user.id
-      params.require(:question).permit(:user_id, :text, :answer, :autor)
+      params.require(:question).permit(:user_id, :text, :answer, :author_id)
     else
-      params.require(:question).permit(:user_id, :text, :autor)
+      params.require(:question).permit(:user_id, :text, :author_id)
     end
   end
 end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  GUEST = User.new
 
   before_action :load_user, except: [:index, :create, :new]
   # Порядок before_action очень важен! Они выполняются сверху вниз
@@ -52,8 +53,18 @@ class UsersController < ApplicationController
     @questions_count = @questions.count
     @answers_count = @questions.where.not(answer: nil).count
     @unanswered_count = @questions_count - @answers_count
-    @user_color = @user.favorite_color
-    @autor = current_user
+
+    if @user.favorite_color == nil || @user.favorite_color == '#000000'
+      @user_color = '#005a55'
+    else
+      @user_color = @user.favorite_color
+    end
+
+    if current_user
+      @author = current_user
+    else
+      @author = GUEST
+    end
   end
 
   def destroy

@@ -48,13 +48,14 @@
         <%= f.hidden_field :user_id %>
 
         <div class="form-field">
-          <% if @autor == nil %>
+          <% if @author == nil %>
             <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
             <%= f.text_area :text, class: 'form-textarea' %>
+            <%= f.hidden_field(:author_id, :value => @author) %>
           <% else %>
             <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
             <%= f.text_area :text, class: 'form-textarea' %>
-            <%= f.hidden_field(:autor, :value => %[#{@autor.username} #{@autor.id}] ) %>
+            <%= f.hidden_field(:author_id, :value => @author.id) %>
           <% end %>
         </div>
 
@@ -71,16 +72,10 @@
     <div class="questions-list">
       <% @questions.each do |question| %>
         <%= render partial: 'questions/question', object: question %>
-        <% if question.autor == nil %>
-          <%= 'Гость' %>
+        <% if question.author_id == nil || User.exists?(question.author_id) == false %>
+          <%= 'вопрос задал: Гость' %>
         <% else %>
-          <% autor_data = question.autor.split %>
-          <% autor_data_pop = autor_data.take (autor_data.size - 1) %>
-          <% if User.exists?(autor_data.last) == false %>
-            <%= 'Гость' %>
-          <% else %>
-            <%= link_to "#{autor_data_pop.join}", user_url(autor_data.last) %>
-          <% end %>
+          <%= link_to "вопрос задал: @#{User.find(question.author_id).username}", user_url(question.author_id) %>
         <% end %>
       <% end %>
     </div>
