@@ -16,10 +16,10 @@ class User < ApplicationRecord
   validates :username, format: {with: REGEXP_USERNAME}
   validates :password, presence: {on: :create}
   validates :password, confirmation: true
+  validates :favorite_color, format: {with: REGEXP_COLOR}
 
   before_validation :normalaize_username
   before_save :encrypt_password
-  before_destroy destroy: :questions
 
   # Служебный метод, преобразующий бинарную строку в шестнадцатиричный формат,
   # для удобства хранения.

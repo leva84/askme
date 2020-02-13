@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  REGEXP_COLOR = /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/
 
   before_action :load_user, except: [:index, :create, :new]
   # Порядок before_action очень важен! Они выполняются сверху вниз
@@ -53,8 +52,8 @@ class UsersController < ApplicationController
     @questions_count = @questions.count
     @answers_count = @questions.where.not(answer: nil).count
     @unanswered_count = @questions_count - @answers_count
+    @user_color = @user.favorite_color
     @autor = current_user
-    @user_color = user_favorite_color
   end
 
   def destroy
@@ -81,15 +80,5 @@ class UsersController < ApplicationController
 
   def authorize_user
     reject_user unless @user == current_user
-  end
-
-  def user_favorite_color
-    if @user.favorite_color == nil || @user.favorite_color == '#000000'
-      "#005a55"
-    elsif !@user.favorite_color.match(REGEXP_COLOR)
-      "#005a55"
-    else
-      @user.favorite_color
-    end
   end
 end
