@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   attr_accessor :password
 
-  has_many :questions, :dependent => :destroy
+  has_many :questions, dependent: :destroy
 
   validates :email, :username, presence: true, uniqueness: true
   validates :email, format: {with: REGEXP_EMAIL}
