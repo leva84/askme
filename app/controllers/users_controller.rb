@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  GUEST = User.new
 
   before_action :load_user, except: [:index, :create, :new]
   # Порядок before_action очень важен! Они выполняются сверху вниз
@@ -63,7 +62,7 @@ class UsersController < ApplicationController
     if current_user
       @author = current_user
     else
-      @author = GUEST
+      @author = User.new
     end
   end
 
