@@ -49,7 +49,7 @@
         <div class="form-field">
           <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
           <%= f.text_area :text, class: 'form-textarea' %>
-          <%= f.hidden_field(:author_id, [:value, @author]) %>
+          <%= f.hidden_field(:author_id, :value => @author) %>
         </div>
         <div class="form-action">
           <%= submit_tag 'Задать вопрос', class: 'button button-small button-dark' %>
