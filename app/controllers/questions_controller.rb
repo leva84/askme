@@ -7,7 +7,6 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   def create
-    @author = current_user
     @question = Question.new(question_params)
 
     if @question.save

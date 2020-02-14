@@ -46,19 +46,11 @@
     <div class="form">
       <%= form_for @new_question do |f| %>
         <%= f.hidden_field :user_id %>
-
         <div class="form-field">
-          <% if @author == nil %>
-            <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
-            <%= f.text_area :text, class: 'form-textarea' %>
-            <%= f.hidden_field(:author_id, :value => @author) %>
-          <% else %>
-            <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
-            <%= f.text_area :text, class: 'form-textarea' %>
-            <%= f.hidden_field(:author_id, :value => @author.id) %>
-          <% end %>
+          <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
+          <%= f.text_area :text, class: 'form-textarea' %>
+          <%= f.hidden_field(:author_id, [:value, @author]) %>
         </div>
-
         <div class="form-action">
           <%= submit_tag 'Задать вопрос', class: 'button button-small button-dark' %>
         </div>

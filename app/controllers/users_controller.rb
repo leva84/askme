@@ -52,23 +52,11 @@ class UsersController < ApplicationController
     @questions_count = @questions.count
     @answers_count = @questions.where.not(answer: nil).count
     @unanswered_count = @questions_count - @answers_count
-
-    if @user.favorite_color == nil || @user.favorite_color == '#000000'
-      @user_color = '#005a55'
-    else
-      @user_color = @user.favorite_color
-    end
-
-    if current_user
-      @author = current_user
-    else
-      @author = User.new
-    end
+    @author = author
+    @user_color = user_favorite_color
   end
 
   def destroy
-    @user.destroy
-
     redirect_to root_path, notice: 'Пользователь удален!'
   end
 
@@ -89,5 +77,21 @@ class UsersController < ApplicationController
 
   def authorize_user
     reject_user unless @user == current_user
+  end
+
+  def author
+    if !current_user == nil
+      current_user.id
+    else
+      User.new
+    end
+  end
+
+  def user_favorite_color
+    if @user.favorite_color == nil || @user.favorite_color == '#000000'
+      @user_color = '#005a55'
+    else
+      @user_color = @user.favorite_color
+    end
   end
 end
