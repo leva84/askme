@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     redirect_to root_url, alert: 'Вы уже залогинены' if current_user.present?
 
     @user = User.new(user_params)
+    @user.favorite_color = '#005a55'
 
     if @user.save
       session[:user_id] = @user.id
@@ -53,10 +54,11 @@ class UsersController < ApplicationController
     @answers_count = @questions.where.not(answer: nil).count
     @unanswered_count = @questions_count - @answers_count
     @author = author
-    @user_color = user_favorite_color
+    @user_color = @user.favorite_color
   end
 
   def destroy
+    @user.destroy
     redirect_to root_path, notice: 'Пользователь удален!'
   end
 
@@ -80,18 +82,6 @@ class UsersController < ApplicationController
   end
 
   def author
-    if !current_user == nil
-      current_user.id
-    else
-      User.new
-    end
-  end
-
-  def user_favorite_color
-    if @user.favorite_color == nil || @user.favorite_color == '#000000'
-      @user_color = '#005a55'
-    else
-      @user_color = @user.favorite_color
-    end
+    current_user.id if current_user.present?
   end
 end
