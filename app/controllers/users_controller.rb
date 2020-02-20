@@ -54,7 +54,6 @@ class UsersController < ApplicationController
     @questions_count = @questions.count
     @answers_count = @questions.where.not(answer: nil).count
     @unanswered_count = @questions_count - @answers_count
-    @author = author
     @user_color = @user.favorite_color
   end
 
@@ -80,9 +79,5 @@ class UsersController < ApplicationController
 
   def authorize_user
     reject_user unless @user == current_user
-  end
-
-  def author
-    current_user.id if current_user.present?
   end
 end
