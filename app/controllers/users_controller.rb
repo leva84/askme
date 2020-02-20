@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include UsersHelper
 
   before_action :load_user, except: [:index, :create, :new]
   # Порядок before_action очень важен! Они выполняются сверху вниз
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
     redirect_to root_url, alert: 'Вы уже залогинены' if current_user.present?
 
     @user = User.new(user_params)
-    @user.favorite_color = '#005a55'
+    favorite_color_default(@user)
 
     if @user.save
       session[:user_id] = @user.id

@@ -26,4 +26,8 @@ module UsersHelper
       end
     end
   end
+
+  def favorite_color_default(user)
+    user.favorite_color = '#005a55'
+  end
 end
