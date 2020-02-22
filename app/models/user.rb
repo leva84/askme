@@ -10,7 +10,7 @@ class User < ApplicationRecord
   attr_accessor :password
 
   has_many :questions, dependent: :destroy
-  has_many :authored_questions, :foreign_key => 'author', class_name: 'Question', dependent: :nullify
+  has_many :authored_questions, foreign_key: 'author_id', class_name: 'Question', dependent: :nullify
 
   validates :email, :username, presence: true, uniqueness: true
   validates :email, format: {with: REGEXP_EMAIL}
