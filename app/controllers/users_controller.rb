@@ -23,7 +23,6 @@ class UsersController < ApplicationController
     redirect_to root_url, alert: 'Вы уже залогинены' if current_user.present?
 
     @user = User.new(user_params)
-    favorite_color_default(@user)
 
     if @user.save
       session[:user_id] = @user.id
