@@ -27,8 +27,8 @@
   <% end %>
 </div>
 
-<% if User.exists?(question.author_id) %>
-  <%= link_to "вопрос задал: @#{User.find(question.author_id).username}", user_url(question.author_id) %>
+<% if question.author.present? %>
+  <%= link_to "вопрос задал: @#{question.author.username}", user_url(question.author) %>
 <% else %>
   <%= 'вопрос задал: @гость' %>
 <% end %>
