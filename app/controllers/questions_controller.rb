@@ -2,6 +2,10 @@ class QuestionsController < ApplicationController
   before_action :load_question, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user, except: [:create]
 
+  def index
+    question_tag_all(@hashtag)
+  end
+
   def edit
   end
 
@@ -35,9 +39,10 @@ class QuestionsController < ApplicationController
   end
 
   private
-    def load_question
-      @question = Question.find(params[:id])
-    end
+
+  def load_question
+    @question = Question.find(params[:id])
+  end
 
   def authorize_user
     reject_user unless @question.user == current_user
@@ -50,9 +55,9 @@ class QuestionsController < ApplicationController
     # Защита от уязвимости: если текущий пользователь — адресат вопроса,
     # он может менять ответы на вопрос, ему доступно и поле :answer.
     if current_user.present? && params[:question][:user_id].to_i == current_user.id
-      params.require(:question).permit(:user_id, :text, :answer, :author_id, :hashtags)
+      params.require(:question).permit(:user_id, :text, :answer, :author_id, :tags)
     else
-      params.require(:question).permit(:user_id, :text, :author_id)
+      params.require(:question).permit(:user_id, :text, :author_id, :tags)
     end
   end
 end
