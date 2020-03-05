@@ -27,14 +27,16 @@
   <% end %>
 </div>
 
-<% if question.author.present? %>
-  <%= link_to "вопрос задал: @#{question.author.username}", user_url(question.author) %>
-<% else %>
-  <%= 'вопрос задал: @гость' %>
-<% end %>
-
-<h3>
-  <% question.tags.uniq.map do |tag| %>
-    <%= link_to "#{tag.name}", questions_path(tag: tag.id) %>
+<div class="question-actions">
+  <% if question.author.present? %>
+    <%= link_to "вопрос задал: @#{question.author.username}", user_url(question.author) %>
+  <% else %>
+    <%= 'вопрос задал: @гость' %>
   <% end %>
-</h3>
+</div>
+
+<div class="text-lead question-actions">Теги:
+  <% question.tags.uniq.map do |tag| %>
+    <%= link_to "#{tag.name}", questions_path(tag: tag.id), class: 'button button-light button-small' %>
+  <% end %>
+</div>
