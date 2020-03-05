@@ -9,7 +9,7 @@
     <div class="questions-list">
       <% @questions.uniq.each do |question| %>
         <% if question.user.present? %>
-          <%= link_to "вопрос задал: @#{question.user.username}", user_url(question.user) %>
+          <%= link_to "вопрос для: @#{question.user.username}", user_url(question.user) %>
         <% else %>
           <%= 'вопрос задал: @гость' %>
         <% end %>
