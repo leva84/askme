@@ -9,18 +9,20 @@ class Question < ApplicationRecord
 
   validates :text, length: {maximum: 255}
 
-  before_save :search_tags
+  before_create :search_tags
 
   private
 
   def search_tags
     text.scan(HASHTAG_REGEXP).map! do |tag|
-      tags << Tag.find_or_initialize_by(name: tag.strip)
+      tag.downcase!
+      tags << Tag.find_or_create_by(name: tag.strip)
     end
 
     if answer != nil
       answer.scan(HASHTAG_REGEXP).map! do |tag|
-        tags << Tag.find_or_initialize_by(name: tag.strip)
+        tag.downcase!
+        tags << Tag.find_or_create_by(name: tag.strip)
       end
     end
   end
