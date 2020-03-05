@@ -37,6 +37,6 @@ module UsersHelper
       end
     end
 
-    tags.uniq!
+    tags.uniq
   end
 end
