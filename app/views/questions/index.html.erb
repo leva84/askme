@@ -8,7 +8,11 @@
   <div class="user-questions buffer-both">
     <div class="questions-list">
       <% @questions.uniq.each do |question| %>
-        <%= link_to "вопрос для: @#{question.user.username}", user_url(question.author) %>
+        <% if question.user.present? %>
+          <%= link_to "вопрос задал: @#{question.user.username}", user_url(question.user) %>
+        <% else %>
+          <%= 'вопрос задал: @гость' %>
+        <% end %>
         <%= render partial: 'questions/question', object: question %>
       <% end %>
     </div>
