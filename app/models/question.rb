@@ -10,6 +10,7 @@ class Question < ApplicationRecord
   validates :text, length: {maximum: 255}
 
   before_create :search_tags
+  before_update :search_tags
 
   private
 
