@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   before_action :authorize_user, except: [:create, :index]
 
   def index
+    @tag = Tag.find(params[:tag])
     @questions = Question.joins(:tags).where('tags.id': params[:tag])
   end
 
