@@ -1,9 +1,9 @@
 class QuestionsController < ApplicationController
   before_action :load_question, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, except: [:create]
+  before_action :authorize_user, except: [:create, :index]
 
   def index
-    question_tag_all(@hashtag)
+    @questions = Question.joins(:tags).where('tags.id': params[:tag])
   end
 
   def edit

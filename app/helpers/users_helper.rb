@@ -26,4 +26,17 @@ module UsersHelper
       end
     end
   end
+
+  def index_tags
+    tags = []
+    @users.map do |user|
+      user.questions.map do |question|
+        question.tags.map do |tag|
+          tags << tag
+        end
+      end
+    end
+
+    tags.uniq!
+  end
 end

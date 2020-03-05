@@ -34,5 +34,7 @@
 <% end %>
 
 <h3>
-  <%= link_to question.tags.map { |tag| tag.name }.join(' ') %>
+  <% question.tags.uniq.map do |tag| %>
+    <%= link_to "#{tag.name}", questions_path(tag: tag.id) %>
+  <% end %>
 </h3>
