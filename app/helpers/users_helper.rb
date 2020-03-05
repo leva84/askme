@@ -32,11 +32,11 @@ module UsersHelper
     @users.map do |user|
       user.questions.map do |question|
         question.tags.map do |tag|
-          tags << tag
+          tags << tag if !tags.include?(tag)
         end
       end
     end
 
-    tags.uniq
+    tags
   end
 end
