@@ -9,22 +9,16 @@ class Question < ApplicationRecord
 
   validates :text, length: {maximum: 255}
 
-  before_create :search_tags
-  before_update :search_tags
+  after_commit :search_tags, on: %i[create update]
 
   private
 
   def search_tags
-    text.scan(HASHTAG_REGEXP).map! do |tag|
-      tag.downcase!
-      tags << Tag.find_or_create_by(name: tag.strip)
-    end
+    # удалить старые связи с хэштэгами
+    tags.clear
 
-    if answer != nil
-      answer.scan(HASHTAG_REGEXP).map! do |tag|
-        tag.downcase!
-        tags << Tag.find_or_create_by(name: tag.strip)
-      end
+    "#{text} #{answer}".downcase.scan(HASHTAG_REGEXP).uniq.map do |tag|
+      tags << Tag.find_or_create_by(name: tag.strip)
     end
   end
 end
