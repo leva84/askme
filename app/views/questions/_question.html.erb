@@ -36,7 +36,7 @@
 </div>
 
 <div class="text-lead question-actions">Теги:
-  <% question.tags.uniq.map do |tag| %>
-    <%= link_to "#{tag.name}", questions_path(tag: tag.id), class: 'button button-light button-small' %>
+  <% question.tags.map do |tag| %>
+    <%= link_to "#{tag.name}", tag_path(tag.id), class: 'button button-light button-small' %>
   <% end %>
 </div>

@@ -1,4 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="content-wrapper buffer-both text-center">
+  <div class="buffer-both">
+    <h1 class="title-medium">Вопросы с тегом <%= @tag.name %></h1>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
-<%= link_to 'Back', tags_path %>
+<div>
+  <div class="user-questions buffer-both">
+    <div class="questions-list">
+      <% @questions.each do |question| %>
+        <%= render partial: 'questions/question', object: question %>
+        <div class="text-lead question-actions">
+          <%= link_to "вопрос для: @#{question.user.username}", user_url(question.user) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

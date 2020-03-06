@@ -8,6 +8,8 @@ class TagsController < ApplicationController
 
   # GET /tags/1
   def show
+    @tag = Tag.find(params[:id])
+    @questions = Question.joins(:tags).where('tags.id': params[:id])
   end
 
   # GET /tags/new
