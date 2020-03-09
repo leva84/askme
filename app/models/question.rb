@@ -18,7 +18,7 @@ class Question < ApplicationRecord
     tags.clear
 
     "#{text} #{answer}".downcase.scan(HASHTAG_REGEXP).uniq.map do |tag|
-      tags << Tag.find_or_create_by(name: tag.strip)
+      tags << Tag.find_or_create_by(name: tag)
     end
   end
 end
