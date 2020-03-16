@@ -8,6 +8,7 @@ class Question < ApplicationRecord
   belongs_to :author, class_name: 'User', optional: true
 
   validates :text, length: {maximum: 255}
+  validates :text, presence: true
 
   after_commit :search_tags, on: %i[create update]
 
